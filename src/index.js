@@ -1,3 +1,5 @@
+import makeInitPage from './modules/page-load';
+
 console.log('Hello World');
 
 
@@ -19,3 +21,5 @@ console.log(clean);
 clean.editTask('work');
 
 console.log(clean);
+
+makeInitPage();
