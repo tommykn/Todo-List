@@ -12,6 +12,7 @@ function makeTitle(name, className) {
 }
 
 
+
 function makeInitPage() {
     const header = makeContainer('header');
     const headerContent = makeTitle('headfe', 'asdf');
