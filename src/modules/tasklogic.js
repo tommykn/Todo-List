@@ -4,7 +4,7 @@ let completedToDos = [];
 
 
 
-const makeNewToDos = (function() {
+const ToDoStructer = (function() {
     const _ToDo = function (task, description, dueDate, priority, difficulty) {
         this.task = task;
         this.description = description;
@@ -29,4 +29,4 @@ const makeNewToDos = (function() {
 
 
 
-export default makeNewToDos;
+export default ToDoStructer;
