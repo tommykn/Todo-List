@@ -11,26 +11,43 @@ function makeTitle(name, className) {
     return title;
 }
 
+function makeUnorderedList(className) {
+    const list = document.createElement('ul');
+    list.classList.add(className);
+    return list;
+}
+
+function makeLI(name) {
+    const li = document.createElement('li');
+    li.textContent = name;
+    return li;
+}
 
 
 function makeInitPage() {
     const header = makeContainer('header');
-    const headerContent = makeTitle('headfe', 'asdf');
+    const headerContent = makeTitle('The Header', 'header-text');
     header.appendChild(headerContent);
-    const sideBar = makeContainer('sidebar');
-    const todayBtn = makeTitle('today', 'today-btn');
-    const monthsBtn = makeTitle('month', 'month-btn');
-    const projectBtn = makeTitle('Projects', 'project-btn');
-    sideBar.appendChild(todayBtn);
-    sideBar.appendChild(monthsBtn);
-    sideBar.appendChild(projectBtn);
-    const mainDiv = makeContainer('main');
-    const mainDivContent = makeTitle('sdfadfafas', 'main');
-    mainDiv.appendChild(mainDivContent);
-    const content = document.getElementById('content');
-    content.appendChild(header);
-    content.appendChild(sideBar);
-    content.appendChild(mainDiv);
+    const mainWrapper = makeContainer('main-wrapper');
+    const sidenav = makeContainer('sidenav');
+    const ul = makeUnorderedList('list');
+    const today = makeLI('Today');
+    const months = makeLI('Months');
+    const projects = makeLI('Projects');
+    ul.appendChild(today);
+    ul.appendChild(months);
+    ul.appendChild(projects);
+    sidenav.appendChild(ul);
+    mainWrapper.appendChild(sidenav);
+    const main = makeContainer('main-content');
+    mainWrapper.appendChild(main);
+    const footer = makeContainer('footer');
+    const footerContent = makeTitle('Footer', 'footer-text');
+    footer.appendChild(footerContent);
+    const contentID = document.getElementById('content');
+    contentID.appendChild(header);
+    contentID.appendChild(mainWrapper);
+    contentID.appendChild(footer);
 }
 
 export default makeInitPage;

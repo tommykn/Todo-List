@@ -1,7 +1,3 @@
-let toDos = [];
-let completedToDos = [];
-
-
 
 
 const ToDoStructer = (function() {
@@ -27,6 +23,25 @@ const ToDoStructer = (function() {
 
 })();
 
+const infoHolder = (function() {
+    let _toDos = [];
+    let _completedToDos = [];
+
+    const addToDo = function(toDo) {
+        _toDos.push(toDo);
+    }
+    const getToDoArray = function() {
+        return _toDos;
+    }
 
 
-export default ToDoStructer;
+    return {
+        addToDo,
+        getToDoArray,
+    };
+
+})();
+
+
+
+export {infoHolder, ToDoStructer};

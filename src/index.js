@@ -1,5 +1,5 @@
 import makeInitPage from './modules/page-load';
-import ToDoStructer from './modules/tasklogic';
+import { ToDoStructer, infoHolder } from './modules/tasklogic';
 
 console.log('Hello World');
 
@@ -8,8 +8,20 @@ makeInitPage();
 
 const clean = ToDoStructer.makeToDo('clean', 'cleaning', '10/21/23', 'Hard', 'easy');
 
-console.log(clean);
+infoHolder.addToDo(clean);
 
-// clean.editTask('working');
+const array = infoHolder.getToDoArray();
 
-// console.log(clean);
+console.log(array);
+
+clean.editTask('working');
+
+console.log(array);
+
+const workout = ToDoStructer.makeToDo('workout', 'push-ups', 'today', 'meduim', 'hard');
+
+infoHolder.addToDo(workout);
+
+console.log(array);
+
+workout.editTask('popout');
