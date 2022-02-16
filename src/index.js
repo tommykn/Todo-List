@@ -1,27 +1,18 @@
 import makeInitPage from './modules/page-load';
 import { ToDoStructer, infoHolder } from './modules/tasklogic';
+import DomController from './modules/domcontroller';
 
 console.log('Hello World');
 
 
 makeInitPage();
 
-const clean = ToDoStructer.makeToDo('clean', 'cleaning', '10/21/23', 'Hard', 'easy');
-
-infoHolder.addToDo(clean);
-
-const array = infoHolder.getToDoArray();
-
-console.log(array);
-
-clean.editTask('working');
-
-console.log(array);
-
+const clean = ToDoStructer.makeToDo('clean', 'cleaning the kitchen', '10/21/23', '!!!', 'easy');
 const workout = ToDoStructer.makeToDo('workout', 'push-ups', 'today', 'meduim', 'hard');
 
-infoHolder.addToDo(workout);
+const homeTodos = document.querySelector('.home-todos');
 
-console.log(array);
+const cleanDomObj = DomController.returnDomToDo(clean);
 
-workout.editTask('popout');
+homeTodos.appendChild(cleanDomObj);
+

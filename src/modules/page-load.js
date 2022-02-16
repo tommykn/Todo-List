@@ -40,6 +40,14 @@ function makeInitPage() {
     sidenav.appendChild(ul);
     mainWrapper.appendChild(sidenav);
     const main = makeContainer('main-content');
+    const home = makeContainer('home');
+    const homeHeader = makeContainer('home-header');
+    const homeHeaderText = makeTitle('Home', 'home-text');
+    homeHeader.appendChild(homeHeaderText);
+    home.appendChild(homeHeader)
+    const homeToDos = makeContainer('home-todos');
+    home.appendChild(homeToDos);
+    main.appendChild(home);
     mainWrapper.appendChild(main);
     const footer = makeContainer('footer');
     const footerContent = makeTitle('Footer', 'footer-text');
