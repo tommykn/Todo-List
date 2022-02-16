@@ -16,6 +16,7 @@ const DomController = (function() {
         const btn = document.createElement('button');
         btn.textContent = name;
         btn.classList.add(className);
+        btn.setAttribute('onclick', "this.blur();");
         return btn;
     };
 

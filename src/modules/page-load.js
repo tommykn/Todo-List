@@ -23,11 +23,23 @@ function makeLI(name) {
     return li;
 }
 
+function makeBtn(className) {
+    const btn = document.createElement('button');
+    btn.classList.add(className);
+    btn.setAttribute('onclick', "this.blur();");
+    return btn;
+}
+
 
 function makeInitPage() {
     const header = makeContainer('header');
     const headerContent = makeTitle('The Header', 'header-text');
+    // modal btn
+    const modalBtn = makeBtn('modal-btn');
+    const btnText = makeTitle('+', 'modal-btn-text');
+    modalBtn.appendChild(btnText);
     header.appendChild(headerContent);
+    header.appendChild(modalBtn);
     const mainWrapper = makeContainer('main-wrapper');
     const sidenav = makeContainer('sidenav');
     const ul = makeUnorderedList('list');
