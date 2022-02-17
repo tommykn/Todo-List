@@ -7,8 +7,8 @@ console.log('Hello World');
 
 makeInitPage();
 
-const clean = ToDoStructer.makeToDo('clean', 'cleaning the kitchen', '10/21/23', '!!!', 'easy');
-const workout = ToDoStructer.makeToDo('workout', 'push-ups', 'today', 'meduim', 'hard');
+const clean = ToDoStructer.makeToDo('clean', 'cleaning the kitchen', '10/21/23', '!!!', 'easy', false);
+const workout = ToDoStructer.makeToDo('workout', 'push-ups', 'today', 'meduim', 'hard', false);
 
 const homeTodos = document.querySelector('.home-todos');
 
