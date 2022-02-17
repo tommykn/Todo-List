@@ -138,6 +138,24 @@ function makeInitPage() {
     contentID.appendChild(header);
     contentID.appendChild(mainWrapper);
     contentID.appendChild(footer);
+
+
+
+    // event listners
+
+    modalBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 }
 
 export default makeInitPage;
