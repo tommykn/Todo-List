@@ -29,6 +29,28 @@ function makeBtn(className) {
     btn.setAttribute('onclick', "this.blur();");
     return btn;
 }
+function makeNamedBtn(name, className) {
+    const btn = document.createElement('button');
+    btn.classList.add(className);
+    btn.textContent = name;
+    btn.setAttribute('onclick', "this.blur();");
+    return btn;
+}
+
+function makeDifficultyModal() {
+    const difmodal = makeContainer('dif-modal');
+    const lv1 = makeNamedBtn('Lv1', 'lv1');
+    const lv2 = makeNamedBtn('Lv1', 'lv2'); 
+    const lv3 = makeNamedBtn('Lv3', 'lv3'); 
+    const lv4 = makeNamedBtn('Lv4', 'lv4'); 
+    const lv5 = makeNamedBtn('Lv5', 'lv5');
+    difmodal.appendChild(lv1);
+    difmodal.appendChild(lv2);
+    difmodal.appendChild(lv3);
+    difmodal.appendChild(lv4);
+    difmodal.appendChild(lv5);
+    return difmodal;
+}
 
 
 function makeInitPage() {
@@ -55,6 +77,8 @@ function makeInitPage() {
     // modal for inputing tasks
     const modal = makeContainer('modal');
     const modalContent = makeContainer('modal-content');
+    const difModal = makeDifficultyModal();
+    modal.appendChild(difModal);
     modal.appendChild(modalContent);
     const taskForm = document.createElement('form');
     taskForm.classList.add('task-form');
