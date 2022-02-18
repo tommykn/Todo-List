@@ -53,6 +53,18 @@ function makeDifficultyModal() {
     return difmodal;
 }
 
+function makePriorityModal() {
+    const difmodal = makeContainer('pri-modal');
+    const pr1 = makeNamedBtn('low', 'pri1', 'pri-btn');
+    const pr2 = makeNamedBtn('meduim', 'pri2', 'pri-btn'); 
+    const pr3 = makeNamedBtn('high', 'pri3', 'pri-btn'); 
+    const pr4 = makeNamedBtn('severe', 'pri4', 'pri-btn'); 
+    difmodal.appendChild(pr1);
+    difmodal.appendChild(pr2);
+    difmodal.appendChild(pr3);
+    difmodal.appendChild(pr4);
+    return difmodal;
+}
 
 function makeInitPage() {
     const header = makeContainer('header');
@@ -79,6 +91,8 @@ function makeInitPage() {
     const modal = makeContainer('modal');
     const modalContent = makeContainer('modal-content');
     const difModal = makeDifficultyModal();
+    const priModal = makePriorityModal();
+    modal.appendChild(priModal);
     modal.appendChild(difModal);
     modal.appendChild(modalContent);
     const taskForm = document.createElement('form');
@@ -129,8 +143,9 @@ function makeInitPage() {
 
 
 
-    const priorityBtn = makeBtn('pri-btn');
+    const priorityBtn = makeBtn('mainPri-btn');
     priorityBtn.textContent = 'Priority';
+    priorityBtn.setAttribute('data-priority', 'none');
     nonrequiredWrapepr.appendChild(difBtn);
     nonrequiredWrapepr.appendChild(dateBtn);
     nonrequiredWrapepr.appendChild(priorityBtn);
@@ -179,7 +194,20 @@ function makeInitPage() {
     // event listners
     const lvBtns = document.querySelectorAll('.lv-btn');
     const lvBtnsArray = Array.from(lvBtns);
-    console.log(lvBtnsArray);
+    const priBtns = document.querySelectorAll('.pri-btn');
+    console.log(priBtns);
+    priBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            priorityBtn.dataset.priority = e.target.textContent;
+            for (let i = 0; i < priBtns.length; i++) {
+                if (priBtns[i].classList.length === 3) {
+                    priBtns[i].classList.toggle('green-background');
+                }
+            }
+            e.target.classList.toggle('green-background');
+        });
+    });
+
 
     lvBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -197,7 +225,18 @@ function makeInitPage() {
 
     difBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        if (priModal.style.display === 'flex') {
+            priModal.style.display = 'none';
+        }
         difModal.style.display = 'flex';
+    });
+
+    priorityBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (difModal.style.display === 'flex') {
+            difModal.style.display = 'none';
+        }
+        priModal.style.display = 'flex';
     });
 
     modalBtn.addEventListener('click', () => {
@@ -206,8 +245,9 @@ function makeInitPage() {
 
     window.addEventListener('click', (e) => {
         if (e.target == modal || e.target == modalContent) {
-            if (difModal.style.display === 'flex') {
+            if (difModal.style.display === 'flex' || priModal.style.display === 'flex') {
                 difModal.style.display = 'none';
+                priModal.style.display = 'none';
                 return;
             }
 
