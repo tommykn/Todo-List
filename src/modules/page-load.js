@@ -29,9 +29,10 @@ function makeBtn(className) {
     btn.setAttribute('onclick', "this.blur();");
     return btn;
 }
-function makeNamedBtn(name, className) {
+function makeNamedBtn(name, className, className1) {
     const btn = document.createElement('button');
     btn.classList.add(className);
+    btn.classList.add(className1);
     btn.textContent = name;
     btn.setAttribute('onclick', "this.blur();");
     return btn;
@@ -39,11 +40,11 @@ function makeNamedBtn(name, className) {
 
 function makeDifficultyModal() {
     const difmodal = makeContainer('dif-modal');
-    const lv1 = makeNamedBtn('Lv1', 'lv1');
-    const lv2 = makeNamedBtn('Lv1', 'lv2'); 
-    const lv3 = makeNamedBtn('Lv3', 'lv3'); 
-    const lv4 = makeNamedBtn('Lv4', 'lv4'); 
-    const lv5 = makeNamedBtn('Lv5', 'lv5');
+    const lv1 = makeNamedBtn('Lv1', 'lv1', 'lv-btn');
+    const lv2 = makeNamedBtn('Lv2', 'lv2', 'lv-btn'); 
+    const lv3 = makeNamedBtn('Lv3', 'lv3', 'lv-btn'); 
+    const lv4 = makeNamedBtn('Lv4', 'lv4', 'lv-btn'); 
+    const lv5 = makeNamedBtn('Lv5', 'lv5', 'lv-btn');
     difmodal.appendChild(lv1);
     difmodal.appendChild(lv2);
     difmodal.appendChild(lv3);
@@ -116,8 +117,18 @@ function makeInitPage() {
     const nonrequiredWrapepr = makeContainer('nonrequired-info');
     const difBtn = makeBtn('dif-btn');
     difBtn.textContent = 'Difficulty';
-    const dateBtn = makeBtn('date-btn');
-    dateBtn.textContent = 'Due Date';
+    difBtn.setAttribute('data-level', 'none');
+
+
+    const dateBtn = document.createElement('input');
+    dateBtn.setAttribute('type', 'date');
+    dateBtn.setAttribute('name', 'date-picker');
+    dateBtn.setAttribute('value', '2022-02-18');
+
+
+
+
+
     const priorityBtn = makeBtn('pri-btn');
     priorityBtn.textContent = 'Priority';
     nonrequiredWrapepr.appendChild(difBtn);
@@ -166,12 +177,41 @@ function makeInitPage() {
 
 
     // event listners
+    const lvBtns = document.querySelectorAll('.lv-btn');
+    const lvBtnsArray = Array.from(lvBtns);
+    console.log(lvBtnsArray);
+
+    lvBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            difBtn.dataset.level = e.target.textContent;
+            for (let i = 0; i < lvBtnsArray.length; i++) {
+                if (lvBtnsArray[i].classList.length === 3) {
+                lvBtnsArray[i].classList.toggle('green-background');
+                }
+            }
+            e.target.classList.toggle('green-background');
+        });
+    });
+
+
+
+    difBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        difModal.style.display = 'flex';
+    });
 
     modalBtn.addEventListener('click', () => {
         modal.style.display = 'flex';
     });
 
     window.addEventListener('click', (e) => {
+        if (e.target == modal || e.target == modalContent) {
+            if (difModal.style.display === 'flex') {
+                difModal.style.display = 'none';
+                return;
+            }
+
+        }
         if (e.target == modal) {
             modal.style.display = 'none';
         }
